@@ -1,25 +1,31 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import createContext from "./createContext";
 import trackerApi from "../api/trackerApi";
+import * as rootNavigation from "../navigationRef";
 
 const authReducer = (state, action) => {
   switch (action.type) {
+    case "signup":
+      return { ...state, token: action.payload, errorMessage: "" };
     case "signin":
-      return { ...state, isSignedIn: true };
+      return { ...state, isSignedIn: true, errorMessage: "" };
     case "signout":
-      return { ...state, isSignedIn: false };
-      case "add_error":
-        return { ...state, errorMessage: action.payload };
+      return { isSignedIn: false, errorMessage: "" };
+    case "add_error":
+      return { ...state, errorMessage: action.payload };
     default:
       return state;
   }
 };
 
-const signUp = (dispatch) => {
-  return async ({ email, password }) => {
+const signUp =
+  (dispatch) =>
+  async ({ email, password }) => {
     try {
       const response = await trackerApi.post("/signup", { email, password });
+      await AsyncStorage.setItem("token", response.data.token);
       dispatch({ type: "signup", payload: response.data.token });
-      console.log(response.data);
+      rootNavigation.navigate("MainFlow");
     } catch (err) {
       dispatch({
         type: "add_error",
@@ -27,7 +33,6 @@ const signUp = (dispatch) => {
       });
     }
   };
-};
 
 const signIn = (dispatch) => {
   return ({ email, password }) => {
@@ -44,5 +49,5 @@ const signOut = (dispatch) => {
 export const { Context, Provider } = createContext(
   authReducer,
   { signUp, signIn, signOut },
-  { isSignedIn: false, errorMessage: "" }
+  { token: null, errorMessage: "" }
 );

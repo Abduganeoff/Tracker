@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
+import { navigationRef } from "./src/navigationRef";
 
 // Screens
 import SignInScreen from "./src/screens/SignInScreen";
@@ -41,7 +42,7 @@ const MainFlow = () => {
 const App = () => {
   return (
     <AuthProvider>
-      <NavigationContainer>
+      <NavigationContainer ref={navigationRef}>
         <Stack.Navigator>
           <Stack.Screen
             name="SignUp"
