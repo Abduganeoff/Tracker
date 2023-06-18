@@ -1,15 +1,23 @@
-import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StyleSheet } from "react-native";
+import { Text, Input, Button } from "react-native-elements";
+import Spacer from "../components/Spacer";
 
 const SignUpScreen = () => {
   const { navigate } = useNavigation();
   return (
-    <View>
-      <Text style={{ fontSize: 48 }}>Sign Up Screen</Text>
-      <Button title="Go to Sign in" onPress={() => navigate("Signin")} />
-      <Button title="Go to Main Flow" onPress={() => navigate("MainFlow")} />
-    </View>
+    <>
+      <Spacer>
+        <Text h3>Sign up for Tracker</Text>
+      </Spacer>
+      <Input label="Email" />
+      <Spacer />
+      <Input label="Password" />
+      <Spacer>
+        <Button title="Sign Up" onPress={() => navigate("MainFlow")} />
+      </Spacer>
+    </>
   );
 };
 
