@@ -1,7 +1,10 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Provider as AuthProvider } from "./src/context/AuthContext";
+
+// Screens
 import SignInScreen from "./src/screens/SignInScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
@@ -37,30 +40,32 @@ const MainFlow = () => {
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="SignUp"
-          component={SignUpScreen}
-          options={{ title: "Sign Up" }}
-        />
-        <Stack.Screen
-          name="SignIn"
-          component={SignInScreen}
-          options={{ title: "Sign Up" }}
-        />
-        <Stack.Screen
-          name="MainFlow"
-          component={MainFlow}
-          options={{ title: "Home" }}
-        />
-        <Stack.Screen
-          name="TrackDetail"
-          component={TrackDetailScreen}
-          options={{ title: "Detail" }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="SignUp"
+            component={SignUpScreen}
+            options={{ title: "Sign Up", headerShown: false }}
+          />
+          <Stack.Screen
+            name="SignIn"
+            component={SignInScreen}
+            options={{ title: "Sign In", headerShown: false }}
+          />
+          <Stack.Screen
+            name="MainFlow"
+            component={MainFlow}
+            options={{ title: "Home" }}
+          />
+          <Stack.Screen
+            name="TrackDetail"
+            component={TrackDetailScreen}
+            options={{ title: "Detail" }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AuthProvider>
   );
 };
 export default App;
