@@ -1,20 +1,66 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import SignInScreen from "./src/screens/SignInScreen";
+import SignUpScreen from "./src/screens/SignUpScreen";
+import TrackListScreen from "./src/screens/TrackListScreen";
+import TrackDetailScreen from "./src/screens/TrackDetailScreen";
+import AccountScreen from "./src/screens/AccountScreen";
+import TrackCreateScreen from "./src/screens/TrackCreateScreen";
 
-export default function App() {
+const Stack = createStackNavigator();
+
+const Tab = createBottomTabNavigator();
+
+const MainFlow = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Tab.Navigator>
+      <Tab.Screen
+        name="TrackList"
+        component={TrackListScreen}
+        options={{ title: "Track List" }}
+      />
+      <Tab.Screen
+        name="TrackCreate"
+        component={TrackCreateScreen}
+        options={{ title: "Create" }}
+      />
+      <Tab.Screen
+        name="Account"
+        component={AccountScreen}
+        options={{ title: "Account" }}
+      />
+    </Tab.Navigator>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="SignUp"
+          component={SignUpScreen}
+          options={{ title: "Sign Up" }}
+        />
+        <Stack.Screen
+          name="SignIn"
+          component={SignInScreen}
+          options={{ title: "Sign Up" }}
+        />
+        <Stack.Screen
+          name="MainFlow"
+          component={MainFlow}
+          options={{ title: "Home" }}
+        />
+        <Stack.Screen
+          name="TrackDetail"
+          component={TrackDetailScreen}
+          options={{ title: "Detail" }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+export default App;
