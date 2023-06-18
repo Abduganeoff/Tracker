@@ -55,7 +55,7 @@ const App = () => {
           <Stack.Screen
             name="SignIn"
             component={SignInScreen}
-            options={{ title: "Sign In", headerShown: false }}
+            options={{ title: "Sign In" }}
           />
 
           <Stack.Screen
