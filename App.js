@@ -15,6 +15,7 @@ import TrackListScreen from "./src/screens/TrackListScreen";
 import TrackDetailScreen from "./src/screens/TrackDetailScreen";
 import AccountScreen from "./src/screens/AccountScreen";
 import TrackCreateScreen from "./src/screens/TrackCreateScreen";
+import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
 
 const Stack = createStackNavigator();
 
@@ -48,6 +49,11 @@ const App = () => {
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator>
           <Stack.Screen
+            name="ResolveAuth"
+            component={ResolveAuthScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name="SignUp"
             component={SignUpScreen}
             options={{ title: "Sign Up", headerShown: false }}
@@ -55,13 +61,13 @@ const App = () => {
           <Stack.Screen
             name="SignIn"
             component={SignInScreen}
-            options={{ title: "Sign In" }}
+            options={{ title: "Sign In", headerShown: false }}
           />
 
           <Stack.Screen
             name="MainFlow"
             component={MainFlow}
-            options={{ title: "Home" }}
+            options={{ title: "Home", headerShown: false }}
           />
           <Stack.Screen
             name="TrackDetail"

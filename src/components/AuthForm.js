@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useContext, useState, useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { Text, Button, Input } from "react-native-elements";
 import Spacer from "./Spacer";
+import { Context as AuthContext } from "../context/AuthContext";
+import { useFocusEffect } from "@react-navigation/native";
 
 const AuthForm = ({ headerText, errorMessage, onSubmit, submitButtonText }) => {
+  const { clearErrorMessage } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useFocusEffect(
+    useCallback(() => {
+      return () => clearErrorMessage();
+    }, [])
+  );
 
   return (
     <>
