@@ -32,12 +32,12 @@ const MainFlow = () => {
       <Tab.Screen
         name="TrackCreate"
         component={TrackCreateScreen}
-        options={{ title: "Create" }}
+        options={{ title: "Create", headerShown: false }}
       />
       <Tab.Screen
         name="Account"
         component={AccountScreen}
-        options={{ title: "Account" }}
+        options={{ title: "Account", headerShown: false }}
       />
     </Tab.Navigator>
   );
