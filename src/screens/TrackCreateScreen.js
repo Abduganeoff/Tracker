@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { Text } from "react-native-elements";
 import { StyleSheet } from "react-native";
@@ -10,11 +10,20 @@ import { Context as LocationContext } from "../context/LocationContext";
 import "../_mockLocation";
 
 const TrackCreateScreen = () => {
-  const { state, addLocation } = useContext(LocationContext);
+  const {
+    state: { recording },
+    addLocation,
+  } = useContext(LocationContext);
   const [isFocused, setIsFocused] = useState(false);
-  const [err] = useLocation(isFocused, (location) => {
-    addLocation(location, state.recording);
-  });
+
+  const callback = useCallback(
+    (location) => {
+      addLocation(location, recording);
+    },
+    [recording]
+  );
+
+  const [err] = useLocation(isFocused || recording, callback);
 
   useFocusEffect(
     React.useCallback(() => {

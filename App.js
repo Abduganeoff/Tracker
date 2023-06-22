@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { navigationRef } from "./src/navigationRef";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
 import { Provider as LocationProvider } from "./src/context/LocationContext";
+import { Provider as TrackProvider } from "./src/context/TrackContext";
 
 // Screens
 import SignInScreen from "./src/screens/SignInScreen";
@@ -43,40 +44,42 @@ const MainFlow = () => {
 
 const App = () => {
   return (
-    <LocationProvider>
-      <AuthProvider>
-        <NavigationContainer ref={navigationRef}>
-          <Stack.Navigator>
-            <Stack.Screen
-              name="ResolveAuth"
-              component={ResolveAuthScreen}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="SignUp"
-              component={SignUpScreen}
-              options={{ title: "Sign Up", headerShown: false }}
-            />
-            <Stack.Screen
-              name="SignIn"
-              component={SignInScreen}
-              options={{ title: "Sign In", headerShown: false }}
-            />
+    <TrackProvider>
+      <LocationProvider>
+        <AuthProvider>
+          <NavigationContainer ref={navigationRef}>
+            <Stack.Navigator>
+              <Stack.Screen
+                name="ResolveAuth"
+                component={ResolveAuthScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="SignUp"
+                component={SignUpScreen}
+                options={{ title: "Sign Up", headerShown: false }}
+              />
+              <Stack.Screen
+                name="SignIn"
+                component={SignInScreen}
+                options={{ title: "Sign In", headerShown: false }}
+              />
 
-            <Stack.Screen
-              name="MainFlow"
-              component={MainFlow}
-              options={{ title: "Home", headerShown: false }}
-            />
-            <Stack.Screen
-              name="TrackDetail"
-              component={TrackDetailScreen}
-              options={{ title: "Detail" }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </AuthProvider>
-    </LocationProvider>
+              <Stack.Screen
+                name="MainFlow"
+                component={MainFlow}
+                options={{ title: "Home", headerShown: false }}
+              />
+              <Stack.Screen
+                name="TrackDetail"
+                component={TrackDetailScreen}
+                options={{ title: "Detail" }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </AuthProvider>
+      </LocationProvider>
+    </TrackProvider>
   );
 };
 export default App;
