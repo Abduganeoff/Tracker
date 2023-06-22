@@ -16,7 +16,11 @@ const TrackForm = () => {
   return (
     <>
       <Spacer>
-        <Input placeholder="Enter name" onChange={changeName} value={name} />
+        <Input
+          placeholder="Enter name"
+          onChangeText={changeName}
+          value={name}
+        />
       </Spacer>
       <Spacer>
         {recording ? (

@@ -24,7 +24,7 @@ const TrackCreateScreen = () => {
   );
 
   const [err] = useLocation(isFocused || recording, callback);
-
+  
   useFocusEffect(
     React.useCallback(() => {
       setIsFocused(true);
